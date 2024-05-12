@@ -2,10 +2,24 @@
 
 Valkey-TPC is a benchmarking tool inspired by the TPC-C benchmark. It is designed to help you evaluate the performance of your transaction processing systems.
 
+      ┌───────────────────────────┐          
+      │                           │          
+      │           Engine          │          
+      │                           │          
+      └────┬─────────────────┬────┘          
+           │                 │               
+      ┌────▼────┐      ┌─────▼────┐          
+      │         │      │          │          
+      │ Storage │      │ Workload │          
+      │         │      │          │          
+      └─────────┘      └──────────┘          
+       *Valkey          *Reddit - Website    
+       *Redis                                
+       *KeyDB                                
+
 ## Table of Contents
 
 - [Getting Started](#getting-started)
-- [Running the Benchmark](#running-the-benchmark)
 - [Testing](#testing)
 - [Contributing](#contributing)
 - [License](#license)
@@ -14,28 +28,12 @@ Valkey-TPC is a benchmarking tool inspired by the TPC-C benchmark. It is designe
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
 
-### Prerequisites
-
-What things you need to install the software and how to install them.
-
-```
-Give examples
-```
-
 ### Installing
 
 A step by step series of examples that tell you how to get a development environment running.
 
 ```
-Give examples
-```
-
-## Running the Benchmark
-
-Explain how to run the benchmark for this system.
-
-```
-Give examples
+make build
 ```
 
 ## Testing
@@ -43,7 +41,7 @@ Give examples
 Explain how to run the automated tests for this system.
 
 ```
-Give examples
+make test
 ```
 
 ## Contributing

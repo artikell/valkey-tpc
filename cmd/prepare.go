@@ -5,6 +5,7 @@ package cmd
 
 import (
 	"fmt"
+	"github.com/artikell/valkey-tpc/workload"
 
 	"github.com/spf13/cobra"
 )
@@ -22,6 +23,8 @@ to quickly create a Cobra application.`,
 	Run: func(cmd *cobra.Command, args []string) {
 		// TODO(lizhiqiang.sf): support new workload：Reddit
 		fmt.Println("prepare called")
+
+		workload.RunWorkLoad("reddit", nil)
 	},
 }
 
