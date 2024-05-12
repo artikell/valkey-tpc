@@ -4,6 +4,7 @@ Copyright © 2024 NAME HERE <EMAIL ADDRESS>
 package cmd
 
 import (
+	"fmt"
 	"github.com/spf13/viper"
 	"golang.org/x/exp/slog"
 	"os"
@@ -51,13 +52,28 @@ func Execute() {
 }
 
 func init() {
-	// Here you will define your flags and configuration settings.
-	// Cobra supports persistent flags, which, if defined here,
-	// will be global for your application.
-	dir, err := os.Getwd()
-	if err != nil {
-		slog.Error("", err)
+	cobra.OnInitialize(initConfig)
+	rootCmd.PersistentFlags().StringVar(&cfgFile, "config", "", "config file (default is $PWD/.valkey-tpc.yaml)")
+	// TODO(lizhiqiang.sf): add log level
+}
+
+func initConfig() {
+	if cfgFile != "" {
+		viper.SetConfigFile(cfgFile)
+	} else {
+		home, err := os.Getwd()
+		if err != nil {
+			fmt.Println(err)
+			os.Exit(1)
+		}
+
+		viper.AddConfigPath(home)
+		viper.SetConfigType("yaml")
+		viper.SetConfigName(".valkey-tpc")
 	}
 
-	rootCmd.PersistentFlags().StringVar(&cfgFile, "config", dir+"/.valkey-tpc.yaml", "config file (default is $PWD/.valkey-tpc.yaml)")
+	if err := viper.ReadInConfig(); err != nil {
+		slog.Error("config file not found or another error was produced", err)
+		os.Exit(1)
+	}
 }
