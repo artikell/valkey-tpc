@@ -4,10 +4,9 @@ Copyright © 2024 NAME HERE <EMAIL ADDRESS>
 package cmd
 
 import (
-	"fmt"
 	"github.com/artikell/valkey-tpc/workload"
-
 	"github.com/spf13/cobra"
+	"github.com/spf13/viper"
 )
 
 // prepareCmd represents the prepare command
@@ -21,10 +20,8 @@ Cobra is a CLI library for Go that empowers applications.
 This application is a tool to generate the needed files
 to quickly create a Cobra application.`,
 	Run: func(cmd *cobra.Command, args []string) {
-		// TODO(lizhiqiang.sf): support new workload：Reddit
-		fmt.Println("prepare called")
-
-		workload.RunWorkLoad("reddit", nil)
+		w := viper.GetString("workload")
+		workload.RunWorkLoad(w, workload.ModePrepare)
 	},
 }
 

@@ -1,6 +1,10 @@
 package workload
 
-import "context"
+import (
+	"context"
+	"github.com/artikell/valkey-tpc/storage"
+	"github.com/spf13/viper"
+)
 
 /*
 Variable：
@@ -13,9 +17,13 @@ Business:
 - List Post
 - Comment Post
 */
+const workLoadName = "Reddit"
 
 func init() {
-	registerWorkLoad("reddit", &WorkLoad{
+	registerWorkLoad(workLoadName, &WorkLoad{
+		paramsVerify: func(v *viper.Viper) error {
+			return nil
+		},
 		action: []*Action{
 			{name: "user_login", run: runUserLogin, weight: 200},
 			{name: "create_post", run: runCreatePost, weight: 50},
@@ -26,25 +34,25 @@ func init() {
 	})
 }
 
-func runUserLogin(ctx context.Context) error {
+func runUserLogin(ctx context.Context, st *storage.Storage) error {
 	//opt := getOption(ctx)
 	//cli := getClient(ctx)
 
 	return nil
 }
 
-func runCreatePost(ctx context.Context) error {
+func runCreatePost(ctx context.Context, st *storage.Storage) error {
 	return nil
 }
 
-func runViewPost(ctx context.Context) error {
+func runViewPost(ctx context.Context, st *storage.Storage) error {
 	return nil
 }
 
-func runListPost(ctx context.Context) error {
+func runListPost(ctx context.Context, st *storage.Storage) error {
 	return nil
 }
 
-func runCommentPost(ctx context.Context) error {
+func runCommentPost(ctx context.Context, st *storage.Storage) error {
 	return nil
 }

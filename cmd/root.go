@@ -31,7 +31,6 @@ to quickly create a Cobra application.`,
 
 		viper.SetConfigFile(cfgFile)
 		viper.SetConfigType("yaml")
-
 		// Read config file
 		if err := viper.ReadInConfig(); err != nil {
 			slog.Error("config file not found or another error was produced", err)
